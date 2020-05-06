@@ -3,10 +3,11 @@ package com.example.kotlin_recyclerview
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.recyclerview.widget.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             Movie("Avengers: Age of Ultron", 10)
         )
 
-        val recyclerAdapter = RecyclerAdapter(movieList)
+        val recyclerAdapter = RecyclerAdapter(movieList, this)
 //        recyclerView.adapter = recyclerAdapter
 //        recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 //        recyclerView.setHasFixedSize(true)
@@ -48,5 +49,13 @@ class MainActivity : AppCompatActivity() {
             addItemDecoration(DividerItemDecoration(this@MainActivity, DividerItemDecoration.VERTICAL))
             setHasFixedSize(true)
         }
+    }
+
+    override fun onClick(position: Int) {
+        Toast.makeText(this, "onClick $position", Toast.LENGTH_LONG).show()
+    }
+
+    override fun onLongClick(position: Int) {
+        Toast.makeText(this, "onLongClick $position", Toast.LENGTH_LONG).show()
     }
 }
