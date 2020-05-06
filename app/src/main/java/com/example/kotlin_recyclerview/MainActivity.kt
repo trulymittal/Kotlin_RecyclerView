@@ -1,5 +1,6 @@
 package com.example.kotlin_recyclerview
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
+
+    lateinit var movieList: ArrayList<Movie>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,7 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 //        movieList.add(Movie("Guardians of the Galaxy", 8));
 //        movieList.add(Movie("Avengers: Age of Ultron", 10));
 
-        var movieList = arrayListOf<Movie>(
+        movieList = arrayListOf<Movie>(
             Movie("Iron Man", 7),
             Movie("The Incredible Hulk", 6),
             Movie("Iron Man 2", 7),
@@ -53,6 +56,10 @@ class MainActivity : AppCompatActivity(), RecyclerAdapter.OnItemClickListener {
 
     override fun onClick(position: Int) {
         Toast.makeText(this, "onClick $position", Toast.LENGTH_LONG).show()
+        val movie = movieList[position]
+        val intent = Intent(this, NewActivity::class.java)
+        intent.putExtra(NewActivity.MOVIE_NAME, movie)
+        startActivity(intent)
     }
 
     override fun onLongClick(position: Int) {
