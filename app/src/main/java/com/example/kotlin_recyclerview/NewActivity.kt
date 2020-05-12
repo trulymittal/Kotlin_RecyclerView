@@ -14,7 +14,9 @@ class NewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new)
 
-        val  movie = intent.getSerializableExtra(MOVIE_NAME) as Movie
+//        val  movie = intent.getSerializableExtra(MOVIE_NAME) as Movie
+//        textView.text = movie.toString()
+        val movie: Movie = intent.getParcelableExtra(MOVIE_NAME) as Movie
         textView.text = movie.toString()
     }
 }
